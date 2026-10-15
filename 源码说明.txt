@@ -1,0 +1,41 @@
+忆言（Yiyan）· 项目完整源码
+================================================
+
+这个「源码」文件夹里就是程序「忆言」的**全部源码**，与旁边「忆言」文件夹里的
+忆言.exe 是同一份代码。
+
+来源
+  git 提交：f767753
+  提交说明：压缩包改为「忆言」+「源码」两个并列文件夹，说明同步
+  导出时间：2026-10-15 16:00:37
+
+文件说明
+  llm_chat.py              主程序（单文件，零第三方依赖）
+  start.bat                双击即可用源码运行（需要本机装了 Python 3.8+）
+  README.md                完整功能说明（含常见问题与参考出处）
+  test.jpeg                示例图片，用于测试视觉模型
+  packaging/               打包用素材与脚本
+    app.ico                程序图标
+    make_icon.py           生成图标的小脚本
+    check_icon.py          检查图标是否正常
+    version.txt            exe 的版本信息（公司名/产品名/版本号）
+    忆言.spec              PyInstaller 打包配方（可复用）
+    使用说明.txt           面向使用者的说明（也就是「忆言」文件夹里那份）
+  .gitignore               不会提交的个人数据/密钥/构建产物清单
+
+怎么用源码运行
+  1. 装 Python 3.8 或更高版本（安装时勾选 "Add python.exe to PATH"）；
+  2. 双击 start.bat（或在命令行里执行  python llm_chat.py）。
+  程序只用 Python 标准库 + tkinter，**不需要 pip 安装任何第三方库**。
+
+怎么重新打包成 exe
+  pip install pyinstaller
+  python -m PyInstaller --noconfirm --clean --onefile --windowed ^
+    --name "忆言" --icon packaging\app.ico --version-file packaging\version.txt ^
+    llm_chat.py
+  产物在 dist\忆言.exe；把它和 test.jpeg、使用说明.txt、README.md 放在同一个
+  文件夹里，就是「忆言」文件夹的内容。
+
+注意
+  源码运行时，配置默认存在用户主目录的 .llm_gui_chat.json；
+  若想让配置跟随程序目录（便携），在程序目录放一个空的 portable.txt 即可。
